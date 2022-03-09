@@ -8,8 +8,7 @@ from logger import logger
 from directory_utilities import get_json_from_file
 
 
-def get_secrets():
-    secrets_file_directory = "../database/secrets.json"
+def get_secrets(secrets_file_directory):
     secrets_template = {
         "bittrex": {
             "bittrexKey": "BITTREX_API_KEY",
@@ -38,8 +37,7 @@ def get_secrets():
     return secrets_content
 
 
-def get_settings():
-    settings_file_directory = "../database/settings.json"
+def get_settings(settings_file_directory):
     settings_template = {
         "sound": False,
         "tradeParameters": {
@@ -81,8 +79,10 @@ def get_settings():
 
 
 if __name__ == "__main__":
-    secrets = get_secrets()
-    settings = get_settings()
+    settings_file_directory = "../database/settings.json"
+    secrets_file_directory = "../database/secrets.json"
+    secrets = get_secrets(secrets_file_directory)
+    settings = get_settings(settings_file_directory )
 
     Messenger = Messenger(secrets, settings)
     Trader = Trader(secrets, settings)
